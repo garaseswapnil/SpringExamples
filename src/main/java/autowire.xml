@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!-- 
+1.	autowire="byName" : Autowiring using property name(Variable name given in POJO class).
+ 	here I given id="address" same variable name given in Employee class. 
+	No need to write ref.
+	<bean class="com.spring.autoWiring.Employee" id="emp" autowire="byName">
+	
+2.	autowire="byType" : Autowiring using property type(variable data type given in POJO class.)
+	If a bean found with same type as the type of property of other bean this bean will be 
+	wired into other beans property
+	<bean class="com.spring.autoWiring.Employee" id="emp" autowire="byType">
+	
+3.	autowire="constructor" : Autowire using Constructor(Constructor name given in POJO class)
+	If a bean found with same type as the constructor argument of other bean this bean will be wired into other bean constructor
+	If you have 3 constructors in a class, zero-arg, one-arg and two-arg then injection will be performed by calling the two-arg constructor.
+	You have to use <constructor-arg> to use autowire="constructor.
+	Cause <property> never calls parameterized constructor.
+ -->
+<!--<bean class="com.spring.autoWiring.Employee" id="emp" autowire="constructor">
+	<constructor-arg name="eid" value="101" ></constructor-arg>
+	<constructor-arg name="ename" value="Swapnil" ></constructor-arg>
+	
+	</bean>
+	<bean class="com.spring.autoWiring.Address" id="address">
+	<constructor-arg name="city" value="Mumbai" ></constructor-arg>
+	<constructor-arg name="pinCode" value="400008" ></constructor-arg>
+	</bean> 
+-->
+
+	<bean class="com.spring.autoWiring.Employee" id="emp">
+	<property name="eid" value="01"></property>
+	<!-- <property name="ename" value="Swapnil"></property> -->
+	<property name="address" ref="address"></property>
+	</bean>
+	
+	<bean class="com.spring.autoWiring.Address" id="address">
+	<property name="city" value="Pune"></property>
+	<property name="pinCode" value="411036"></property>
+	</bean>
+	
+<!-- 	<bean class="com.spring.autoWiring.Address" id="addr2">
+	<property name="city" value="Pune"></property>
+	<property name="pinCode" value="411036"></property>
+	</bean>
+ -->
+</beans>
